@@ -1,20 +1,20 @@
-# Use the official Python image
-FROM python:3.9
+# Set base image (host OS)
+FROM python:3.12-alpine
 
-# Set the working directory
-WORKDIR /code
+# By default, listen on port 5000
+EXPOSE 5000/tcp
 
-# Copy the requirements file
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the dependencies file to the working directory
 COPY requirements.txt .
 
-# Install dependencies
-RUN pip3 install -r requirements.txt
+# Install any dependencies
+RUN pip install -r requirements.txt
 
-# Copy the rest of the app code
-COPY . .
+# Copy the content of the local src directory to the working directory
+COPY app.py .
 
-# Expose the port your Flask app runs on
-EXPOSE 50505
-
-# Define the command to run your app
-CMD ["gunicorn", "app:app"]
+# Specify the command to run on container start
+CMD [ "python", "./app.py" ]
