@@ -1,3 +1,4 @@
+#!/bin/python
 from flask import Flask, render_template
 import requests
 import json 
@@ -11,15 +12,12 @@ def get_meme():
     subreddit = response["subreddit"]
     return meme_large, subreddit
 
-@app.route('/')
-def hello_world():
-    return "Hello World!"
 
 @app.route('/')
 def index():
-   meme_pic, subreddit = get_meme()
-   print(meme_pic, subreddit)
-   return render_template("index.html", meme_pic=meme_pic, subreddit=subreddit)
+    meme_pic, subreddit = get_meme()
+    print(meme_pic, subreddit)
+    return render_template("meme_index.html", meme_pic=meme_pic, subreddit=subreddit)
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=5000)

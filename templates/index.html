@@ -1,18 +1,18 @@
 <!doctype html>
 <head>
-    <title>Hello Azure - Python Quickstart</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Hello AWS - Python Quickstart</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="/static/favicon.ico">
 </head>
 <html>
    <body>
      <main>
         <div class="px-4 py-3 my-2 text-center">
-            <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/azure-icon.svg') }}" alt="Azure Logo" width="192" height="192"/>
+            <img class="d-block mx-auto mb-4" src="/static/images/random-logo.svg" alt="Random Logo" width="150" height="150"/>
             <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-            <h1 class="display-6 fw-bold text-primary">Welcome to Azure</h1>            
+            <h1 class="display-6 fw-bold text-primary">Welcome to AWS webapp</h1>            
           </div>
-        <form method="post" action="{{url_for('hello')}}">
+        <form method="post" action="/templates/hello.html">
             <div class="col-md-6 mx-auto text-center">
                 <label for="name" class="form-label fw-bold fs-5">Could you please tell me your name?</label>
 
@@ -25,6 +25,10 @@
                 </div>            
             </div>
         </form>
+        <h1>Random meme!</h1>
+        <p>Here is your meme! This will refresh in 15 seconds!</p>
+        <p><img src="{{meme_pic}}"></p>
+        <p>Current subreddit: {{subreddit}} </p>
      </main>      
    </body>
 </html>
