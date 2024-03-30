@@ -1,25 +1,15 @@
-from flask import Flask, render_template
-import requests
-import json 
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy() # db intitialized here
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret-key'
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data/task.db"
+db.init_app(app)
 
-def get_meme():
-    url = "https://meme-api.com/gimme"
-    response = json.loads(requests.request("GET", url).text)
-    meme_large = response["preview"][-2]
-    subreddit = response["subreddit"]
-    return meme_large, subreddit
+# db.create_all()
 
-@app.route('/')
-def hello_world():
-    return "Hello World!"
-
-@app.route('/')
-def index():
-   meme_pic, subreddit = get_meme()
-   print(meme_pic, subreddit)
-   return render_template("index.html", meme_pic=meme_pic, subreddit=subreddit)
+from routes import *
 
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
